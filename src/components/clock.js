@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class Clock extends React.Component {
 
 	tick() {
 		this.setState({
-			date: new Date(),
+			date: new Date(), 
 		})
 	}
 
