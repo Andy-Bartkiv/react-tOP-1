@@ -9,7 +9,6 @@ class App extends React.Component {
 		this.state = {
 			inputValue: '',
 			tasks: [],
-			time: new Date().toLocaleTimeString(),
 		}
   }
 
@@ -17,15 +16,8 @@ class App extends React.Component {
 		return new Date().toLocaleTimeString()
 	}
 
-	tick() {
-		this.setState({
-			time: this.getTime(), 
-		})
-	}
-
 	handleClick() {
-		this.tick();
-		const newTask = {time: this.state.time, text: this.state.inputValue};
+		const newTask = {time: this.getTime(), text: this.state.inputValue};
 		this.setState({
 			inputValue: '',
 			tasks: this.state.tasks.concat(newTask),
@@ -37,6 +29,23 @@ class App extends React.Component {
 		this.setState({
       inputValue: event.target.value
     });
+	}
+
+	deleteTask(i) {
+		const newTasks = [...this.state.tasks];
+		newTasks.splice(i, 1);
+		this.setState({
+			tasks: newTasks,
+		});
+	}
+
+	openEditMode(i) {
+		const newTasks = [...this.state.tasks];
+		// console.log(newTasks[i])
+		newTasks[i].text += '+++' ;
+		this.setState({
+			tasks: newTasks,
+		});
 	}
 
 	render() {
@@ -52,7 +61,11 @@ class App extends React.Component {
 				<button onClick={() => this.handleClick()}>
 					Add Task
 				</button>
-				<Overview tasks={this.state.tasks}/>
+				<Overview 
+					tasks={this.state.tasks}
+					deleteTask={ (i) => this.deleteTask(i) }
+					openEditMode={ (i) => this.openEditMode(i) }
+				/>
 			</div>
 		)
 	}

@@ -17,3 +17,28 @@
 li {
   text-align: start;
 }
+
+span.edit-task {
+  background: wheat;
+}
+
+li>button {
+  color: #282c34;
+  font-weight: 900;
+  border-radius: .25em;
+  padding: 0 .25em;
+  vertical-align: .25em;
+  cursor: pointer;
+}
+
+li>button:hover {
+  background: darkred;
+}
+
+.btn-edit:hover {
+  background: darkslateblue;
+}
+
+.btn-edit.edit-task:hover {
+  background: green;
+}
