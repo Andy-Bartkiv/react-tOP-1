@@ -18,8 +18,13 @@ li {
   text-align: start;
 }
 
-span.edit-task {
+input.edit-task {
   background: wheat;
+  vertical-align: .375em;
+}
+
+button {
+  cursor: pointer;
 }
 
 li>button {

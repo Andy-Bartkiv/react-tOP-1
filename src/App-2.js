@@ -9,6 +9,8 @@ class App extends React.Component {
 		this.state = {
 			inputValue: '',
 			tasks: [],
+			editIndex: -1,
+			editText: '',
 		}
   }
 
@@ -21,13 +23,16 @@ class App extends React.Component {
 		this.setState({
 			inputValue: '',
 			tasks: this.state.tasks.concat(newTask),
+			editIndex: -1,
+			editText: '',
 		})
 	}
 
 	updateInputValue(event) {
-		event.preventDefault();
+		// event.preventDefault();
 		this.setState({
-      inputValue: event.target.value
+      inputValue: event.target.value,
+			editIndex: -1,
     });
 	}
 
@@ -36,15 +41,31 @@ class App extends React.Component {
 		newTasks.splice(i, 1);
 		this.setState({
 			tasks: newTasks,
+			editIndex: -1,
 		});
 	}
 
 	openEditMode(i) {
+		const taskText = this.state.tasks[i].text;
+		this.setState({
+			editIndex: i,
+			editText: taskText,
+		});
+	}
+
+	updateTaskText(event) {
+		this.setState({
+      editText: event.target.value,
+    });
+	}
+
+	closeEditMode(i) {
 		const newTasks = [...this.state.tasks];
-		// console.log(newTasks[i])
-		newTasks[i].text += '+++' ;
+		newTasks[i].text = this.state.editText;
 		this.setState({
 			tasks: newTasks,
+			editIndex: -1,
+			editText: '',
 		});
 	}
 
@@ -63,8 +84,12 @@ class App extends React.Component {
 				</button>
 				<Overview 
 					tasks={this.state.tasks}
+					editIndex={this.state.editIndex}
+					editText={this.state.editText}
 					deleteTask={ (i) => this.deleteTask(i) }
 					openEditMode={ (i) => this.openEditMode(i) }
+					updateTaskText={ (event) => this.updateTaskText(event) }
+					closeEditMode={ (i) => this.closeEditMode(i) }
 				/>
 			</div>
 		)
