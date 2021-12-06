@@ -31,7 +31,7 @@ class App extends React.Component {
 	updateInputValue(event) {
 		// event.preventDefault();
 		this.setState({
-      inputValue: event.target.value,
+      		inputValue: event.target.value,
 			editIndex: -1,
     });
 	}
@@ -55,7 +55,7 @@ class App extends React.Component {
 
 	updateTaskText(event) {
 		this.setState({
-      editText: event.target.value,
+    	editText: event.target.value,
     });
 	}
 
